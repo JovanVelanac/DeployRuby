@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  parameters{
+    choice(name: 'CHOICE', choices: ['staging', 'production'], description: 'Pick something')
+}
 
   stages {
     stage('Build') {
@@ -7,9 +10,9 @@ pipeline {
         sh 'tar czvf deployruby.tar.gz *.rb'
       }
     }
-    stage('Publish') {
+    stage('Deliver') {
       steps {
-        archiveArtifacts 'deployruby.tar.gz'
+        ansiblePlaybook credentialsId: 'toolbox-vagrant-key', inventory: "inventories/${params.CHOICE}/hosts.ini", playbook: 'playbook.yml', disableHostKeyChecking: true
       }
     }
 }
