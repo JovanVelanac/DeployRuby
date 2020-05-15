@@ -15,6 +15,6 @@
     - name: enable and start service
       become: yes
       systemd:
-        name: web.rubby
+        name: web.rb
         enabled: yes
         state: restarted
