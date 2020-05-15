@@ -1,7 +1,7 @@
 hosts: all
   tasks:
     - name: create service template
-      become: yes # sudo
+      become: yes
       template:
         src: temp.service.j2
         dest: /etc/systemd/system/deployruby.service
