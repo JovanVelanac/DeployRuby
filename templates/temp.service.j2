@@ -1,11 +1,11 @@
 [Unit]
-Description=Our example of go application
+Description=Our example of ruby application
 After=network.target
-
 [Service]
+Environment=GEM_PATH=/home/vagrant/.gem/ruby/
+WorkingDirectory=/home/vagrant
 Type=simple
-ExecStart=/home/vagrant/exam
-PIDFile=/var/run/simple
-
+ExecStart=/usr/bin/ruby web.rb
 [Install]
 WantedBy=default.target
+
