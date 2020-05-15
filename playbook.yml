@@ -6,9 +6,15 @@
         src: temp.service.j2
         dest: /etc/systemd/system/deployruby.service
 
+    - name: copy artifact
+      copy:
+        src: web.rb
+        dest: /home/vagrant/web.rb
+        mode: '0777'
+
     - name: enable and start service
       become: yes
       systemd:
-        name: deployruby
+        name: web.rubby
         enabled: yes
         state: restarted
